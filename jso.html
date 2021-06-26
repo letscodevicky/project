@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ajax Api call by jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+  
+function myFunction() {
+  fetch('https://api.covid19india.org/v4/min/data.min.json').then((apidata)=>{
+	//console.log(apidata);
+	return apidata.json();
+})
+.then((actualdata) => {
+var y=(actualdata.UP.districts.Aligarh.total.confirmed);
+var z= actualdata.UP.districts.document .getElementById("Agra").value.total.confirmed;
+console.log(z)
+var x = (actualdata.UP.z.total.confirmed);
+  const mydata = y;
+  const myddata = actualdata.UP.districts.Agra.total.deceased;
+  const mydddata = actualdata.UP.districts.Agra.total.confirmed;
+  const myddddata = actualdata.UP.districts.Agra.total.recovered;
+  const mydddddata = (mydddata-myddata)-myddddata;
+  document.getElementById('demo').innerHTML=mydata;
+  document.getElementById('demo1').innerHTML=myddata;
+  document.getElementById('demo2').innerHTML=mydddata;
+  document.getElementById('demo3').innerHTML=myddddata;
+  document.getElementById('demo4').innerHTML=mydddddata;
+  document.getElementById("Agra").value = x;
+ 
+})
+.catch((error)=>{
+console.log(error);
+});
+
+
+
+}
+
+    </script>
+  </head>
+  <body>
+	  <p id="demo"></p>
+    <p id ="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+    <input type="text" id="Agra" value="Agra">
+<p>Click the button to change the value of the text field.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+  </body>
+</html>
